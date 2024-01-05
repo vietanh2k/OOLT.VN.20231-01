@@ -11,7 +11,7 @@ public class MainGui {
     private JFrame mainFrame;
     private MenuGui menuGui;
     private InputGui inputGui;
-    private DemoGui demoGui;
+    private BubbleSortGui bubbleGui;
     private int sortId = 0;
 
 
@@ -33,7 +33,7 @@ public class MainGui {
     }
 
     private void initializeMainMenu() {
-        menuGui = new MenuGui();
+        menuGui = new MenuGui(sizeW, sizeH);
         menuGui.startBtn.addActionListener(e -> showInputGui());
         menuGui.helpBtn.addActionListener(e -> showHelp());
         menuGui.quitBtn.addActionListener(e -> confirmQuit());
@@ -49,10 +49,10 @@ public class MainGui {
     }
 
     private void initializeDemoPanel() {
-        demoGui = new DemoGui(sizeW, sizeH);
-        demoGui.backBtn.addActionListener(e -> showMainMenu());
+        bubbleGui = new BubbleSortGui(sizeW, sizeH);
+        bubbleGui.backBtn.addActionListener(e -> showMainMenu());
 
-        mainFrame.add(demoGui, "DemoGui");
+        mainFrame.add(bubbleGui, "bubbleGui");
     }
 
     private void showMainMenu() {
@@ -93,13 +93,15 @@ public class MainGui {
             inputGui.showResultErr("Array not created!");
             return;
         }
-        demoGui.setArr(inputGui.arr);
-        demoGui.updateSortName((String) menuGui.sortList.getSelectedItem());
 
-        demoGui.createObject();
+        bubbleGui.startBtn.setVisible(true);
+        bubbleGui.setArr(inputGui.arr);
+        bubbleGui.updateSortName((String) menuGui.sortList.getSelectedItem());
+
+        bubbleGui.createObject();
 //        demoGui.startAnimation(0,5);
         CardLayout cardLayout = (CardLayout) mainFrame.getContentPane().getLayout();
-        cardLayout.show(mainFrame.getContentPane(), "DemoGui");
+        cardLayout.show(mainFrame.getContentPane(), "bubbleGui");
         // Logic for starting the sorting algorithm goes here
 //        JOptionPane.showMessageDialog(mainFrame, "Sorting algorithm started. Showing each step...");
     }

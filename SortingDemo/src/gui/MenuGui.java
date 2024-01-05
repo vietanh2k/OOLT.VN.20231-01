@@ -4,54 +4,40 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MenuGui extends JPanel {
+    private int sizeW = 0;
+    private int sizeH = 0;
     public JButton startBtn;
     public JButton helpBtn;
     public JButton quitBtn;
     public JComboBox<String> sortList;
 
-    public MenuGui(){
-        setLayout(new GridBagLayout());
+    public MenuGui(int sizeW, int sizeH){
+        this.sizeW = sizeW;
+        this.sizeH = sizeH;
+        setLayout(null);
         JLabel title = new JLabel("Sorting Demo");
-        title.setFont(new Font("Arial", Font.BOLD, 30));
-        GridBagConstraints titleConstraint = new GridBagConstraints();
-        titleConstraint.gridx = 0;
-        titleConstraint.gridy = 0;
-        titleConstraint.insets = new Insets(10, 10, 20, 10);
-        add(title, titleConstraint);
+        title.setFont(new Font("Arial", Font.BOLD, 50));
+        add(title);
+        title.setBounds(sizeW / 2 - 170, 100, 600, 80);
 
         sortList = new JComboBox<>(new String[]{"Bubble Sort", "Insertion Sort", "Selection Sort"});
-        sortList.setFont(new Font("Arial", Font.PLAIN, 16));
-        GridBagConstraints sortListConstraints = new GridBagConstraints();
-        sortListConstraints.gridx = 0;
-        sortListConstraints.gridy = 1;
-        sortListConstraints.insets = new Insets(0, 10, 10, 10);
-        add(sortList, sortListConstraints);
+        sortList.setFont(new Font("Arial", Font.PLAIN, 40));
+        add(sortList);
+        sortList.setBounds(sizeW / 2 - 200, 300, 400, 50);
 
         startBtn = new JButton("Start Demo");
-        startBtn.setFont(new Font("Arial", Font.PLAIN, 18));
-//        startBtn.addActionListener(e -> showDemo());
-        GridBagConstraints startBtnConstraints = new GridBagConstraints();
-        startBtnConstraints.gridx = 0;
-        startBtnConstraints.gridy = 2;
-        startBtnConstraints.insets = new Insets(10, 10, 10, 10);
-        add(startBtn, startBtnConstraints);
+        startBtn.setFont(new Font("Arial", Font.PLAIN, 40));
+        add(startBtn);
+        startBtn.setBounds(sizeW / 2 - 150, 400, 300, 50);
 
         helpBtn = new JButton("Help");
-        helpBtn.setFont(new Font("Arial", Font.PLAIN, 16)); // TÃ„Æ’ng cÃ¡Â»Â¡ chÃ¡Â»Â¯ lÃƒÂªn
-//        helpBtn.addActionListener(e -> showHelp());
-        GridBagConstraints helpBtnConstraints = new GridBagConstraints();
-        helpBtnConstraints.gridx = 0;
-        helpBtnConstraints.gridy = 3;
-        helpBtnConstraints.insets = new Insets(10, 10, 10, 10);
-        add(helpBtn, helpBtnConstraints);
+        helpBtn.setFont(new Font("Arial", Font.PLAIN, 40)); // TÃ„Æ’ng cÃ¡Â»Â¡ chÃ¡Â»Â¯ lÃƒÂªn
+        add(helpBtn);
+        helpBtn.setBounds(sizeW / 2 - 150, 480, 300, 50);
 
         quitBtn = new JButton("Quit");
-        quitBtn.setFont(new Font("Arial", Font.PLAIN, 16)); // TÃ„Æ’ng cÃ¡Â»Â¡ chÃ¡Â»Â¯ lÃƒÂªn
-//        quitBtn.addActionListener(e -> confirmQuit());
-        GridBagConstraints quitBtnConstraints = new GridBagConstraints();
-        quitBtnConstraints.gridx = 0;
-        quitBtnConstraints.gridy = 4;
-        quitBtnConstraints.insets = new Insets(10, 10, 10, 10);
-        add(quitBtn, quitBtnConstraints);
+        quitBtn.setFont(new Font("Arial", Font.PLAIN, 40)); // TÃ„Æ’ng cÃ¡Â»Â¡ chÃ¡Â»Â¯ lÃƒÂªn
+        add(quitBtn);
+        quitBtn.setBounds(sizeW / 2 - 150, 560, 300, 50);
     }
 }

@@ -16,12 +16,19 @@ public class DemoGui extends JPanel {
     public JLabel resultArray;
     public JLabel sortName;
     public int[] arr = null;
+    public int[] arrIndex = null;
+    public int maxInd = 0;
+    public ImageIcon whiteSquare;
+    public ImageIcon greenSquare;
+    public ImageIcon orangeSquare;
+    public ImageIcon orangeSquareSelected;
 
 
     public DemoGui(int sizeW, int sizeH) {
         this.sizeW = sizeW;
         this.sizeH = sizeH;
         setLayout(null);
+        setBackground(Color.decode("#C3C3C3"));
 
         backBtn = new JButton("Back");
         backBtn.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -31,7 +38,7 @@ public class DemoGui extends JPanel {
 
         startBtn = new JButton("Start");
         startBtn.setFont(new Font("Arial", Font.PLAIN, 20));
-        startBtn.addActionListener(e -> swapTwoItem(0, 5));
+        startBtn.addActionListener(e -> startAnimation());
         add(startBtn);
         startBtn.setBounds(0, 50, 80, 40);
 
@@ -46,99 +53,34 @@ public class DemoGui extends JPanel {
         sortName.setBounds(100, 50, 500, 40);
     }
 
-    public void swapTwoItem(int ind1, int ind2) {
-        if(ind1 >= itemList.length || ind2 >= itemList.length){
-            return;
-        }
-
-        JLabel item1 = itemList[ind1];
-        JLabel item2 = itemList[ind2];
-        item1.setForeground(Color.RED);
-        item2.setForeground(Color.RED);
-
-        int posX1 = item1.getX();
-        int posX2 = item2.getX();
-
-        int startY = item1.getY();
-        int endY = item1.getHeight() * 2 +startY;
-
-        int stepsDown = 10;
-        int stepSizeDown = (endY - startY) / stepsDown;
-
-        int sub = Math.abs(ind1 - ind2);
-        if(sub <= 2) sub = 2;
-
-        int stepsMove = 2*sub;
-        int stepSizeMove = (int)Math.ceil((posX2- posX1) / stepsMove);
-
-        int stepsUp = stepsDown;
-
-        timer = new Timer(10, new ActionListener() {
-            int dem0 = 1;
-            int dem1 = 1;
-            int dem2 = 1;
-            int dem3 = 1;
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(dem0 <= 20){
-                    dem0++;
-                }else if(dem1 <= stepsDown){
-                    if(dem1 == stepsDown){
-                        item1.setLocation(item1.getX(), endY);
-                        item2.setLocation(item2.getX(), endY);
-                    }else{
-                        item1.setLocation(item1.getX(), item1.getY() + stepSizeDown);
-                        item2.setLocation(item2.getX(), item1.getY() + stepSizeDown);
-                    }
-
-                    dem1++;
-                }else if(dem2 <= stepsMove){
-                    if(dem2 == stepsMove){
-                        item1.setLocation(posX2, item1.getY());
-                        item2.setLocation(posX1, item2.getY());
-                    }else{
-                        item1.setLocation(item1.getX() + stepSizeMove, item1.getY());
-                        item2.setLocation(item2.getX() - stepSizeMove, item1.getY());
-                    }
-
-                    dem2++;
-                }else if(dem3 <= stepsUp){
-                    if(dem3 == stepsUp){
-                        item1.setLocation(item1.getX(), startY);
-                        item2.setLocation(item2.getX(), startY);
-                    }else{
-                        item1.setLocation(item1.getX(), item1.getY() - stepSizeDown);
-                        item2.setLocation(item2.getX(), item1.getY() - stepSizeDown);
-                    }
-
-                    dem3++;
-                }else{
-                    item1.setForeground(Color.BLACK);
-                    item2.setForeground(Color.BLACK);
-                    timer.stop();
-                }
-            }
-        });
-
-        timer.start();
-    }
-
     public void createObject() {
         if (this.arr == null || this.arr.length <= 1) return;
         itemList = new JLabel[arr.length];
         indexList = new JLabel[arr.length];
 
         int startX = this.sizeW/2 - (arr.length+1)/2 * 70;
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("res/whiteSquare.png"));
+        Image image = imageIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        whiteSquare = new ImageIcon(image);
+
+        ImageIcon imageIcon1 = new ImageIcon(getClass().getResource("res/greenSquare.png"));
+        Image image1 = imageIcon1.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        greenSquare = new ImageIcon(image1);
+
+        ImageIcon imageIcon2 = new ImageIcon(getClass().getResource("res/orangeSquare.png"));
+        Image image2 = imageIcon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        orangeSquare = new ImageIcon(image2);
+
+        ImageIcon imageIcon3 = new ImageIcon(getClass().getResource("res/orangeSquareSelected.png"));
+        Image image3 = imageIcon3.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        orangeSquareSelected = new ImageIcon(image3);
 
         for (int i = 0; i < arr.length; i++) {
             JLabel label = new JLabel();
             label.setLayout(new BorderLayout());
-            String pathName = "res/a.png";
-            ImageIcon imageIcon = new ImageIcon(getClass().getResource(pathName));
-            Image image = imageIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-            ImageIcon scaledIcon = new ImageIcon(image);
 
-            label.setIcon(scaledIcon);
+
+            label.setIcon(whiteSquare);
             label.setText("<html><center>" + arr[i] + "</center></html>");
             label.setFont(new Font("Arial", Font.BOLD, 26));
             label.setHorizontalTextPosition(JLabel.CENTER);
@@ -168,6 +110,10 @@ public class DemoGui extends JPanel {
     }
 
     public void resetObject() {
+        if(timer != null && timer.isRunning()){
+            timer.stop();
+        }
+
         for (JLabel label : itemList) {
             if (label == null) continue;
             remove(label);
@@ -181,12 +127,17 @@ public class DemoGui extends JPanel {
         itemList = null;
         indexList = null;
         arr = null;
+        arrIndex = null;
     }
 
     public void setArr(int[] arr) {
         this.arr = arr;
         if (this.arr == null) return;
-
+        arrIndex = new int[arr.length];
+        for(int i=0; i< arr.length;i++){
+            arrIndex[i] = i;
+        }
+        maxInd = arr.length-1;
         String str = "Before array: ";
         for (int i = 0; i < arr.length; i++) {
             str += arr[i] + " | ";
@@ -198,8 +149,8 @@ public class DemoGui extends JPanel {
         sortName.setText(name);
     }
 
-    public void updateSortLabel(String sortName) {
-
+    public void startAnimation() {
+        startBtn.setVisible(false);
     }
 
     public void resetResult() {
