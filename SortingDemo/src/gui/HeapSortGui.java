@@ -71,7 +71,7 @@ public class HeapSortGui extends DemoGui{
         label1.setVisible(true);
         label1.setText("Build heap tree.");
 
-        timer = new Timer(500, new ActionListener() {
+        timer = new Timer(500/mulSpeed, new ActionListener() {
             int dem1 = 0;
             int ind = 0;
             @Override
@@ -151,7 +151,7 @@ public class HeapSortGui extends DemoGui{
     }
 
     public void swapAndRemove() {
-        timer = new Timer(10, new ActionListener() {
+        timer = new Timer(10/mulSpeed, new ActionListener() {
             int dem1 = 1;
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -240,7 +240,7 @@ public class HeapSortGui extends DemoGui{
         int stepSizeX = (posX2 - posX1) / stepsNum;
         int stepSizeY = (posY2 - posY1) / stepsNum;
 
-        timer = new Timer(10, new ActionListener() {
+        timer = new Timer(10/mulSpeed, new ActionListener() {
             int dem0 = 1;
             int dem1 = 1;
             int dem2 = 1;
@@ -300,7 +300,7 @@ public class HeapSortGui extends DemoGui{
 
         int stepsUp = stepsDown;
 
-        timer = new Timer(10, new ActionListener() {
+        timer = new Timer(10/mulSpeed, new ActionListener() {
             int dem0 = 1;
             int dem1 = 1;
             int dem2 = 1;
@@ -369,7 +369,7 @@ public class HeapSortGui extends DemoGui{
     }
 
     public void removeHeap() {
-        timer = new Timer(10, new ActionListener() {
+        timer = new Timer(10/mulSpeed, new ActionListener() {
             int dem0 = 1;
             int dem1 = 1;
             int dem2 = 1;

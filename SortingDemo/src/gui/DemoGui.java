@@ -22,6 +22,7 @@ public class DemoGui extends JPanel {
     public ImageIcon greenSquare;
     public ImageIcon orangeSquare;
     public ImageIcon orangeSquareSelected;
+    public int mulSpeed = 1;
 
 
     public DemoGui(int sizeW, int sizeH) {
@@ -35,6 +36,18 @@ public class DemoGui extends JPanel {
         backBtn.addActionListener(e -> resetObject());
         add(backBtn);
         backBtn.setBounds(0, 0, 80, 40);
+
+        JButton upSpeed = new JButton("speedX2");
+        upSpeed.setFont(new Font("Arial", Font.PLAIN, 20));
+        upSpeed.addActionListener(e -> updateSpeed(true));
+        add(upSpeed);
+        upSpeed.setBounds(sizeW-150, 0, 150, 40);
+
+        JButton downSpeed = new JButton("speedX0.5");
+        downSpeed.setFont(new Font("Arial", Font.PLAIN, 20));
+        downSpeed.addActionListener(e -> updateSpeed(false));
+        add(downSpeed);
+        downSpeed.setBounds(sizeW-150, 45, 150, 40);
 
         startBtn = new JButton("Start");
         startBtn.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -155,5 +168,15 @@ public class DemoGui extends JPanel {
 
     public void resetResult() {
 
+    }
+
+    public void updateSpeed(boolean isInc) {
+        if(isInc){
+            mulSpeed = mulSpeed*2;
+            if(mulSpeed > 16) mulSpeed = 16;
+        }else{
+            mulSpeed = mulSpeed/2;
+            if(mulSpeed < 1) mulSpeed = 1;
+        }
     }
 }

@@ -79,7 +79,7 @@ public class ShellSortGui extends DemoGui{
         int step3 = 20;
         int step4 = 10;
 
-        timer = new Timer(50, new ActionListener() {
+        timer = new Timer(50/mulSpeed, new ActionListener() {
             int dem1 = 1;
             int dem2 = 1;
             int dem3 = 1;
@@ -164,7 +164,7 @@ public class ShellSortGui extends DemoGui{
         int step3 = 10;
         int step4 = 10;
 
-        timer = new Timer(50, new ActionListener() {
+        timer = new Timer(50/mulSpeed, new ActionListener() {
             int dem0 = 1;
             int dem1 = 1;
             int dem2 = 1;
@@ -233,7 +233,7 @@ public class ShellSortGui extends DemoGui{
 
         int stepsUp = stepsDown;
 
-        timer = new Timer(10, new ActionListener() {
+        timer = new Timer(10/mulSpeed, new ActionListener() {
             int dem0 = 1;
             int dem1 = 1;
             int dem2 = 1;
