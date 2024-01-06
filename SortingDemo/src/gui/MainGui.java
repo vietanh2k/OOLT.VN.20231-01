@@ -12,6 +12,8 @@ public class MainGui {
     private MenuGui menuGui;
     private InputGui inputGui;
     private BubbleSortGui bubbleGui;
+    private HeapSortGui heapGui;
+    private ShellSortGui shellGui;
     private int sortId = 0;
 
 
@@ -53,6 +55,16 @@ public class MainGui {
         bubbleGui.backBtn.addActionListener(e -> showMainMenu());
 
         mainFrame.add(bubbleGui, "bubbleGui");
+
+        heapGui = new HeapSortGui(sizeW, sizeH);
+        heapGui.backBtn.addActionListener(e -> showMainMenu());
+
+        mainFrame.add(heapGui, "heapGui");
+
+        shellGui = new ShellSortGui(sizeW, sizeH);
+        shellGui.backBtn.addActionListener(e -> showMainMenu());
+
+        mainFrame.add(shellGui, "shellGui");
     }
 
     private void showMainMenu() {
@@ -94,14 +106,34 @@ public class MainGui {
             return;
         }
 
-        bubbleGui.startBtn.setVisible(true);
-        bubbleGui.setArr(inputGui.arr);
-        bubbleGui.updateSortName((String) menuGui.sortList.getSelectedItem());
+        if(sortId == 0){
+            bubbleGui.startBtn.setVisible(true);
+            bubbleGui.setArr(inputGui.arr);
+            bubbleGui.updateSortName((String) menuGui.sortList.getSelectedItem());
 
-        bubbleGui.createObject();
+            bubbleGui.createObject();
+
+            CardLayout cardLayout = (CardLayout) mainFrame.getContentPane().getLayout();
+            cardLayout.show(mainFrame.getContentPane(), "bubbleGui");
+        }else if(sortId == 1){
+            heapGui.startBtn.setVisible(true);
+            heapGui.setArr(inputGui.arr);
+            heapGui.updateSortName((String) menuGui.sortList.getSelectedItem());
+
+            heapGui.createObject();
+            CardLayout cardLayout = (CardLayout) mainFrame.getContentPane().getLayout();
+            cardLayout.show(mainFrame.getContentPane(), "heapGui");
+        } else if(sortId == 2){
+            shellGui.startBtn.setVisible(true);
+            shellGui.setArr(inputGui.arr);
+            shellGui.updateSortName((String) menuGui.sortList.getSelectedItem());
+
+            shellGui.createObject();
 //        demoGui.startAnimation(0,5);
-        CardLayout cardLayout = (CardLayout) mainFrame.getContentPane().getLayout();
-        cardLayout.show(mainFrame.getContentPane(), "bubbleGui");
+            CardLayout cardLayout = (CardLayout) mainFrame.getContentPane().getLayout();
+            cardLayout.show(mainFrame.getContentPane(), "shellGui");
+        }
+
         // Logic for starting the sorting algorithm goes here
 //        JOptionPane.showMessageDialog(mainFrame, "Sorting algorithm started. Showing each step...");
     }

@@ -20,7 +20,7 @@ public class MenuGui extends JPanel {
         add(title);
         title.setBounds(sizeW / 2 - 170, 100, 600, 80);
 
-        sortList = new JComboBox<>(new String[]{"Bubble Sort", "Insertion Sort", "Selection Sort"});
+        sortList = new JComboBox<>(new String[]{"Bubble Sort", "Heap Sort", "Shell Sort"});
         sortList.setFont(new Font("Arial", Font.PLAIN, 40));
         add(sortList);
         sortList.setBounds(sizeW / 2 - 200, 300, 400, 50);

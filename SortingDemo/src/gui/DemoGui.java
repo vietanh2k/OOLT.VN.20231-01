@@ -6,8 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DemoGui extends JPanel {
-    private int sizeW = 0;
-    private int sizeH = 0;
+    public int sizeW = 0;
+    public int sizeH = 0;
     public JLabel[] itemList;
     public JLabel[] indexList;
     public Timer timer;
