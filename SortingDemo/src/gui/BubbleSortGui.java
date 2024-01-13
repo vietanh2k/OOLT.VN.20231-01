@@ -176,8 +176,7 @@ public class BubbleSortGui extends DemoGui{
 
         JLabel item1 = itemList[arrIndex[ind1]];
         JLabel item2 = itemList[arrIndex[ind2]];
-//        item1.setForeground(Color.RED);
-//        item2.setForeground(Color.RED);
+
 
         int posX1 = item1.getX();
         int posX2 = item2.getX();
@@ -236,8 +235,7 @@ public class BubbleSortGui extends DemoGui{
 
                     dem3++;
                 }else{
-//                    item1.setForeground(Color.BLACK);
-//                    item2.setForeground(Color.BLACK);
+
                     item1.setIcon(whiteSquare);
                     item2.setIcon(whiteSquare);
                     int tmp = arrIndex[ind1];
