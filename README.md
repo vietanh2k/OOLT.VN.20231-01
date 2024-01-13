@@ -1,6 +1,6 @@
 # OOLT.VN.20231-01
 Member information <br>
-Nguyễn Việt Anh(L): GUI <br>
+Nguyễn Việt Anh(L): GUI, Main, Input, ClassDiagram, Usecase <br>
 Nguyễn Bình An: BubbleSortAlgorithm <br>
 Hoàng Ngọc Ánh: ShellSortAlgorithm <br>
 Hoàng Tố An: HeapSortAlgorithm <br>
