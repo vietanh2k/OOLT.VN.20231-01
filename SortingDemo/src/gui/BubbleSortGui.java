@@ -57,7 +57,7 @@ public class BubbleSortGui extends DemoGui{
         int step1 = 10;
         int step2 = 20;
         int step3 = 20;
-        int step4 = 10;
+        // int step4 = 10;
 
         timer = new Timer(50/mulSpeed, new ActionListener() {
             int dem1 = 1;
@@ -119,7 +119,7 @@ public class BubbleSortGui extends DemoGui{
         int step1 = 5;
         int step2 = 10;
         int step3 = 10;
-        int step4 = 10;
+        // int step4 = 10;
 
         timer = new Timer(50/mulSpeed, new ActionListener() {
             int dem0 = 1;
